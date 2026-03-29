@@ -22,7 +22,7 @@ class GlobalState(BaseModel):
     search_summary: str = Field(default="", description="搜索结果摘要")
     cleaned_text: str = Field(default="", description="清洗后的文本")
     generated_image_url: str = Field(default="", description="生成的图片URL")
-    analysis_report: str = Field(default="", description="分析报告")
+    analysis_report: str = Field(default="", description="暴富基因检测报告")
 
 
 # ========== Node Input/Output Definitions ==========
@@ -66,10 +66,10 @@ class CleanDataNodeOutput(BaseModel):
 class AnalysisNodeInput(BaseModel):
     """分析节点输入"""
     token_name: str = Field(..., description="代币名称")
-    cleaned_text: str = Field(..., description="清洗后的文本")
-    generated_image_url: str = Field(..., description="生成的图片URL")
+    cleaned_text: str = Field(..., description="清洗后的舆情数据")
+    generated_image_url: str = Field(..., description="生成的 Meme 预测图片URL")
 
 
 class AnalysisNodeOutput(BaseModel):
     """分析节点输出"""
-    analysis_report: str = Field(..., description="深度分析报告")
+    analysis_report: str = Field(..., description="暴富基因检测报告")

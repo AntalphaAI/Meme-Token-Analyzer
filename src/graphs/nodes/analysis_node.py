@@ -37,8 +37,8 @@ def analysis_node(
         # 渲染用户提示词
         up_tpl = Template(up)
         user_prompt_content = up_tpl.render({
-            "token_name": state.token_name,
-            "cleaned_text": state.cleaned_text
+            "token": state.token_name,
+            "sentiment_data": state.cleaned_text
         })
         
         logger.info(f"Analysis for token: {state.token_name}")
