@@ -14,13 +14,13 @@ def clean_data_node(
     runtime: Runtime[Context]
 ) -> CleanDataNodeOutput:
     """
-    title: 舆情清洗
-    desc: 将 Google 搜索结果精简为 Claude 能读懂的摘要
+    title: Sentiment Cleaning
+    desc: Clean Google search results into a concise summary for LLM analysis
     """
     ctx = runtime.context
     
     try:
-        # 提取搜索结果的标题和摘要（只取前5条最相关的）
+        # Extract search result titles and snippets (top 5 most relevant)
         snippets: List[str] = []
         
         if state.search_results:
@@ -30,16 +30,16 @@ def clean_data_node(
                 if title or snippet:
                     snippets.append(f"【{title}】\n{snippet}")
         
-        # 如果没有搜到结果
+        # Handle no results case
         if not snippets:
             logger.warning("No search results found")
             return CleanDataNodeOutput(
-                cleaned_text=f"未能在网上找到关于该代币的最新爆点叙事。"
+                cleaned_text=f"Unable to find latest trending narratives for this token online."
             )
         
-        # 如果有AI摘要，优先添加
+        # Add AI summary if available
         if state.search_summary:
-            cleaned_text = f"=== AI 摘要 ===\n{state.search_summary}\n\n=== 详细信息 ===\n\n" + "\n---\n".join(snippets)
+            cleaned_text = f"=== AI Summary ===\n{state.search_summary}\n\n=== Detailed Information ===\n\n" + "\n---\n".join(snippets)
         else:
             cleaned_text = "\n---\n".join(snippets)
         
@@ -49,4 +49,4 @@ def clean_data_node(
         
     except Exception as e:
         logger.error(f"Data cleaning failed: {str(e)}", exc_info=True)
-        return CleanDataNodeOutput(cleaned_text=f"数据清洗失败: {str(e)}")
+        return CleanDataNodeOutput(cleaned_text=f"Data cleaning failed: {str(e)}")

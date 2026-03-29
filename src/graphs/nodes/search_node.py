@@ -16,28 +16,28 @@ def search_node(
     runtime: Runtime[Context]
 ) -> SearchNodeOutput:
     """
-    title: 网络搜索
-    desc: 搜索指定代币的最新新闻、社交媒体情绪和市场动态
+    title: Web Search
+    desc: Search for latest news, social media sentiment, and market trends for the token
     integrations: web-search
     """
     ctx = runtime.context
     
     try:
-        # 初始化搜索客户端
+        # Initialize search client
         client = SearchClient(ctx=ctx)
         
-        # 构建搜索查询
+        # Build search query
         query = f"{state.token_name} token news twitter sentiment"
         
         logger.info(f"Searching for: {query}")
         
-        # 执行搜索，包含AI摘要
+        # Execute search with AI summary
         response = client.web_search_with_summary(
             query=query,
             count=10
         )
         
-        # 提取搜索结果
+        # Extract search results
         search_results: List[Dict[str, Any]] = []
         if response.web_items:
             for item in response.web_items:
@@ -50,7 +50,7 @@ def search_node(
                     "auth_info_des": item.auth_info_des
                 })
         
-        # 提取摘要
+        # Extract summary
         summary = response.summary if response.summary else ""
         
         logger.info(f"Found {len(search_results)} results, summary length: {len(summary)}")
@@ -62,8 +62,8 @@ def search_node(
         
     except Exception as e:
         logger.error(f"Search failed: {str(e)}", exc_info=True)
-        # 返回空结果
+        # Return empty results on failure
         return SearchNodeOutput(
             search_results=[],
-            search_summary=f"搜索失败: {str(e)}"
+            search_summary=f"Search failed: {str(e)}"
         )

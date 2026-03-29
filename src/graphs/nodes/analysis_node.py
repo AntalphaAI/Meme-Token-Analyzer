@@ -18,14 +18,14 @@ def analysis_node(
     runtime: Runtime[Context]
 ) -> AnalysisNodeOutput:
     """
-    title: 深度分析
-    desc: 使用多模态大模型分析代币舆情数据和预测图片，生成综合报告
+    title: Deep Analysis
+    desc: Use multimodal LLM to analyze sentiment data and prediction image, generate comprehensive report
     integrations: llm
     """
     ctx = runtime.context
     
     try:
-        # 读取配置文件
+        # Read config file
         cfg_file = os.path.join(os.getenv("COZE_WORKSPACE_PATH"), config['metadata']['llm_cfg'])
         with open(cfg_file, 'r', encoding='utf-8') as fd:
             _cfg = json.load(fd)
@@ -34,7 +34,7 @@ def analysis_node(
         sp = _cfg.get("sp", "")
         up = _cfg.get("up", "")
         
-        # 渲染用户提示词
+        # Render user prompt
         up_tpl = Template(up)
         user_prompt_content = up_tpl.render({
             "token": state.token_name,
@@ -43,10 +43,10 @@ def analysis_node(
         
         logger.info(f"Analysis for token: {state.token_name}")
         
-        # 初始化LLM客户端
+        # Initialize LLM client
         client = LLMClient(ctx=ctx)
         
-        # 构建多模态消息（文本 + 图片）
+        # Build multimodal message (text + image)
         messages = [
             SystemMessage(content=sp),
             HumanMessage(content=[
@@ -63,7 +63,7 @@ def analysis_node(
             ])
         ]
         
-        # 调用模型
+        # Invoke model
         response = client.invoke(
             messages=messages,
             model=llm_config.get("model", "doubao-seed-1-6-vision-250815"),
@@ -71,11 +71,11 @@ def analysis_node(
             max_completion_tokens=llm_config.get("max_completion_tokens", 4096)
         )
         
-        # 提取响应内容
+        # Extract response content
         if isinstance(response.content, str):
             analysis_report = response.content
         elif isinstance(response.content, list):
-            # 处理多模态响应
+            # Handle multimodal response
             text_parts = []
             for item in response.content:
                 if isinstance(item, dict) and item.get("type") == "text":

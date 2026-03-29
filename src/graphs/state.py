@@ -4,72 +4,72 @@ from pydantic import BaseModel, Field
 
 # ========== Graph Input/Output ==========
 class GraphInput(BaseModel):
-    """工作流输入参数"""
-    token_name: str = Field(..., description="代币名称，例如：PEPE 或 Dogecoin")
+    """Workflow input parameters"""
+    token_name: str = Field(..., description="Token name, e.g., PEPE or Dogecoin")
 
 
 class GraphOutput(BaseModel):
-    """工作流输出结果"""
-    analysis_report: str = Field(..., description="深度分析报告")
-    generated_image_url: str = Field(..., description="生成的代币冲月预测图URL")
+    """Workflow output results"""
+    analysis_report: str = Field(..., description="Meme token analysis report")
+    generated_image_url: str = Field(..., description="Generated prediction image URL")
 
 
 # ========== Global State ==========
 class GlobalState(BaseModel):
-    """全局状态定义"""
-    token_name: str = Field(default="", description="代币名称")
-    search_results: List[Dict[str, Any]] = Field(default=[], description="搜索结果列表")
-    search_summary: str = Field(default="", description="搜索结果摘要")
-    cleaned_text: str = Field(default="", description="清洗后的文本")
-    generated_image_url: str = Field(default="", description="生成的图片URL")
-    analysis_report: str = Field(default="", description="暴富基因检测报告")
+    """Global state definition"""
+    token_name: str = Field(default="", description="Token name")
+    search_results: List[Dict[str, Any]] = Field(default=[], description="Search results list")
+    search_summary: str = Field(default="", description="Search results summary")
+    cleaned_text: str = Field(default="", description="Cleaned text")
+    generated_image_url: str = Field(default="", description="Generated image URL")
+    analysis_report: str = Field(default="", description="Analysis report")
 
 
 # ========== Node Input/Output Definitions ==========
 
 # Search Node
 class SearchNodeInput(BaseModel):
-    """搜索节点输入"""
-    token_name: str = Field(..., description="代币名称")
+    """Search node input"""
+    token_name: str = Field(..., description="Token name")
 
 
 class SearchNodeOutput(BaseModel):
-    """搜索节点输出"""
-    search_results: List[Dict[str, Any]] = Field(default=[], description="搜索结果列表")
-    search_summary: str = Field(default="", description="搜索结果AI摘要")
+    """Search node output"""
+    search_results: List[Dict[str, Any]] = Field(default=[], description="Search results list")
+    search_summary: str = Field(default="", description="AI-generated search summary")
 
 
 # Image Generation Node
 class ImageGenNodeInput(BaseModel):
-    """图片生成节点输入"""
-    token_name: str = Field(..., description="代币名称")
+    """Image generation node input"""
+    token_name: str = Field(..., description="Token name")
 
 
 class ImageGenNodeOutput(BaseModel):
-    """图片生成节点输出"""
-    generated_image_url: str = Field(..., description="生成的图片URL")
+    """Image generation node output"""
+    generated_image_url: str = Field(..., description="Generated image URL")
 
 
 # Clean Data Node
 class CleanDataNodeInput(BaseModel):
-    """舆情清洗节点输入"""
-    search_results: List[Dict[str, Any]] = Field(default=[], description="搜索结果列表")
-    search_summary: str = Field(default="", description="搜索结果摘要")
+    """Data cleaning node input"""
+    search_results: List[Dict[str, Any]] = Field(default=[], description="Search results list")
+    search_summary: str = Field(default="", description="Search results summary")
 
 
 class CleanDataNodeOutput(BaseModel):
-    """舆情清洗节点输出"""
-    cleaned_text: str = Field(..., description="清洗后的文本摘要")
+    """Data cleaning node output"""
+    cleaned_text: str = Field(..., description="Cleaned text summary")
 
 
 # Analysis Node
 class AnalysisNodeInput(BaseModel):
-    """分析节点输入"""
-    token_name: str = Field(..., description="代币名称")
-    cleaned_text: str = Field(..., description="清洗后的舆情数据")
-    generated_image_url: str = Field(..., description="生成的 Meme 预测图片URL")
+    """Analysis node input"""
+    token_name: str = Field(..., description="Token name")
+    cleaned_text: str = Field(..., description="Cleaned sentiment data")
+    generated_image_url: str = Field(..., description="Generated meme prediction image URL")
 
 
 class AnalysisNodeOutput(BaseModel):
-    """分析节点输出"""
-    analysis_report: str = Field(..., description="暴富基因检测报告")
+    """Analysis node output"""
+    analysis_report: str = Field(..., description="Meme token analysis report")

@@ -9,25 +9,25 @@ from graphs.nodes.image_gen_node import image_gen_node
 from graphs.nodes.clean_data_node import clean_data_node
 from graphs.nodes.analysis_node import analysis_node
 
-# 创建状态图
+# Create state graph
 builder = StateGraph(
     GlobalState,
     input_schema=GraphInput,
     output_schema=GraphOutput
 )
 
-# ========== 添加节点 ==========
+# ========== Add Nodes ==========
 
-# 搜索节点
+# Search node
 builder.add_node("search", search_node)
 
-# 图片生成节点
+# Image generation node
 builder.add_node("image_gen", image_gen_node)
 
-# 数据清洗节点
+# Data cleaning node
 builder.add_node("clean_data", clean_data_node)
 
-# 分析节点
+# Analysis node
 builder.add_node(
     "analysis",
     analysis_node,
@@ -37,20 +37,20 @@ builder.add_node(
     }
 )
 
-# ========== 设置边 ==========
+# ========== Set Edges ==========
 
-# 从 START 并行启动搜索和图片生成节点
+# Start search and image generation in parallel from START
 builder.add_edge(START, "search")
 builder.add_edge(START, "image_gen")
 
-# 搜索完成后进行数据清洗
+# Clean data after search completes
 builder.add_edge("search", "clean_data")
 
-# 数据清洗和图片生成完成后汇聚到分析节点
+# Converge to analysis node after data cleaning and image generation complete
 builder.add_edge(["clean_data", "image_gen"], "analysis")
 
-# 分析完成后结束
+# End after analysis completes
 builder.add_edge("analysis", END)
 
-# ========== 编译图 ==========
+# ========== Compile Graph ==========
 main_graph = builder.compile()
