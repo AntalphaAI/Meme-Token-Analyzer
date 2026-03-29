@@ -15,48 +15,38 @@ def clean_data_node(
 ) -> CleanDataNodeOutput:
     """
     title: 舆情清洗
-    desc: 将搜索结果清洗整理为结构化的摘要文本
+    desc: 将 Google 搜索结果精简为 Claude 能读懂的摘要
     """
     ctx = runtime.context
     
     try:
-        # 构建清洗后的文本
-        text_parts: List[str] = []
+        # 提取搜索结果的标题和摘要（只取前5条最相关的）
+        snippets: List[str] = []
         
-        # 1. 添加AI摘要（如果有）
-        if state.search_summary:
-            text_parts.append("=== 搜索摘要 ===")
-            text_parts.append(state.search_summary)
-            text_parts.append("")
-        
-        # 2. 整理搜索结果
         if state.search_results:
-            text_parts.append("=== 搜索结果详情 ===")
-            for i, result in enumerate(state.search_results, 1):
-                title = result.get("title", "无标题")
-                snippet = result.get("snippet", "")
-                site_name = result.get("site_name", "")
-                publish_time = result.get("publish_time", "")
-                auth_info = result.get("auth_info_des", "")
-                
-                text_parts.append(f"\n【{i}】{title}")
-                if site_name:
-                    text_parts.append(f"来源: {site_name}")
-                if publish_time:
-                    text_parts.append(f"时间: {publish_time}")
-                if auth_info:
-                    text_parts.append(f"权威性: {auth_info}")
-                if snippet:
-                    text_parts.append(f"摘要: {snippet}")
+            for item in state.search_results[:5]:
+                title = item.get("title", "")
+                snippet = item.get("snippet", "")
+                if title or snippet:
+                    snippets.append(f"【{title}】\n{snippet}")
         
-        # 3. 合并为完整文本
-        cleaned_text = "\n".join(text_parts)
+        # 如果没有搜到结果
+        if not snippets:
+            logger.warning("No search results found")
+            return CleanDataNodeOutput(
+                cleaned_text=f"未能在网上找到关于该代币的最新爆点叙事。"
+            )
         
-        logger.info(f"Cleaned text length: {len(cleaned_text)} chars")
+        # 如果有AI摘要，优先添加
+        if state.search_summary:
+            cleaned_text = f"=== AI 摘要 ===\n{state.search_summary}\n\n=== 详细信息 ===\n\n" + "\n---\n".join(snippets)
+        else:
+            cleaned_text = "\n---\n".join(snippets)
+        
+        logger.info(f"Cleaned {len(snippets)} search results, total length: {len(cleaned_text)} chars")
         
         return CleanDataNodeOutput(cleaned_text=cleaned_text)
         
     except Exception as e:
         logger.error(f"Data cleaning failed: {str(e)}", exc_info=True)
-        # 返回空文本
         return CleanDataNodeOutput(cleaned_text=f"数据清洗失败: {str(e)}")
