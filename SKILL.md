@@ -5,6 +5,7 @@ description: "Meme Token Analyzer workflow with web search, image generation, da
 author: AntalphaAI
 license: MIT
 requires: [python-3.12]
+keywords: [meme, token, crypto, cryptocurrency, sentiment-analysis, image-generation, multimodal, ai, langgraph, wealth-gene]
 metadata:
   repository: https://github.com/AntalphaAI/Meme-Token-Analyzer
   install:
@@ -76,12 +77,74 @@ This skill supports Python SDK.
 
 ## Workflow Architecture
 
+### DAG Flow Diagram
+
+```
+                              ┌─────────────────────────────────────┐
+                              │           START                      │
+                              │         (token_name)                 │
+                              └──────────────┬──────────────────────┘
+                                             │
+                      ┌──────────────────────┴──────────────────────┐
+                      │                                             │
+                      ▼                                             ▼
+        ┌─────────────────────────┐                 ┌─────────────────────────┐
+        │      search_node        │                 │     image_gen_node      │
+        │   (Web Search Node)     │                 │  (Image Generation)     │
+        │                         │                 │                         │
+        │  • Search web news      │                 │  • Generate prediction  │
+        │  • Fetch sentiment      │                 │    image for token      │
+        │  • AI summary           │                 │  • 2K resolution        │
+        └───────────┬─────────────┘                 └───────────┬─────────────┘
+                    │                                           │
+                    ▼                                           │
+        ┌─────────────────────────┐                             │
+        │   clean_data_node       │                             │
+        │   (Data Cleaning)       │                             │
+        │                         │                             │
+        │  • Condense results     │                             │
+        │  • Validate dates       │                             │
+        │  • Remove noise         │                             │
+        └───────────┬─────────────┘                             │
+                    │                                           │
+                    └─────────────────┬─────────────────────────┘
+                                      │
+                                      ▼
+                      ┌─────────────────────────────────────┐
+                      │       analysis_node                  │
+                      │   (Wealth Gene Detection)           │
+                      │                                      │
+                      │  • Multimodal analysis              │
+                      │  • Narrative Magic Check            │
+                      │  • Community Hype Prediction        │
+                      │  • Visual Gene Detection            │
+                      │  • Wealth Gene Rating               │
+                      └──────────────┬──────────────────────┘
+                                     │
+                                     ▼
+                      ┌─────────────────────────────────────┐
+                      │              END                     │
+                      │   (analysis_report, image_url)      │
+                      └─────────────────────────────────────┘
+```
+
+### Execution Flow
+
 ```
 START
   ├── search (Web Search) ──> clean_data (Data Cleaning) ──┐
   └── image_gen (Image Generation) ────────────────────────┤
                                                             ├─> analysis (Wealth Gene Detection) ──> END
 ```
+
+### Node Details
+
+| Node | Type | Input | Output | Description |
+|------|------|-------|--------|-------------|
+| `search_node` | Task | `token_name` | `search_results`, `search_summary` | Web search with AI summary |
+| `image_gen_node` | Task | `token_name` | `generated_image_url` | AI prediction image generation |
+| `clean_data_node` | Task | `search_results`, `search_summary` | `sentiment_data` | Data cleaning and condensation |
+| `analysis_node` | Agent | `sentiment_data`, `generated_image_url` | `analysis_report` | Multimodal wealth gene analysis |
 
 **Parallel Execution**: Search and image generation run in parallel for efficiency.
 
