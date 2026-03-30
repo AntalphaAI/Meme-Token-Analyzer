@@ -26,15 +26,18 @@ def search_node(
         # Initialize search client
         client = SearchClient(ctx=ctx)
         
-        # Build search query
+        # Build search query with recent time filter
         query = f"{state.token_name} token news twitter sentiment"
         
-        logger.info(f"Searching for: {query}")
+        logger.info(f"Searching for: {query} (time_range: 1 month)")
         
-        # Execute search with AI summary
-        response = client.web_search_with_summary(
+        # Execute search with AI summary and time range filter
+        response = client.search(
             query=query,
-            count=10
+            search_type="web",
+            count=10,
+            need_summary=True,
+            time_range="1m"  # Filter results from last 1 month for fresh data
         )
         
         # Extract search results

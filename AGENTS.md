@@ -18,6 +18,16 @@
 ## Subgraph Inventory
 No subgraphs
 
+## Features ✨
+
+- **🔍 Web Search**: Searches latest news, social media sentiment, and market trends with **time range filter (1 month)** for fresh data
+- **🎨 Image Generation**: Creates "Moonshot" prediction images for tokens
+- **🧹 Data Cleaning**: Condenses search results into LLM-friendly summaries with **date freshness validation**
+- **🤖 AI Analysis**: Multimodal analysis combining sentiment data and visual elements
+- **💎 Wealth Gene Rating**: Four-tier rating system (Diamond Hand, Moonshot, Paper Hand, Shitcoin)
+- **🧠 Smart Detection**: Automatically detects major coins (BTC/ETH/SOL), handles missing data, and identifies irrelevant search results with appropriate warnings
+- **📅 Data Freshness Check**: Validates search result dates and warns if data is outdated
+
 ## Skills Used
 - Node `search` uses skill `web-search` for web search
 - Node `image_gen` uses skill `image-generation` for image generation
@@ -47,3 +57,13 @@ Report contains four dimensions:
    - 🌙 Moonshot - 100x expected
    - 🗑️ Paper Hand - Likely a rug
    - 💩 Shitcoin - Stay away
+
+## Intelligent Detection Rules
+
+The workflow includes smart detection logic:
+
+1. **Major Cryptocurrency Detection**: When analyzing BTC, ETH, SOL, etc., the report will humorously warn: "⚠️ Detected non-typical Meme, now performing cross-border scan with [Top Value Coin] perspective."
+
+2. **No Data Handling**: If sentiment_data is empty or shows no results, the system will NOT fabricate prices, instead stating: "This token is so mysterious that even the shilling army online hasn't discovered it yet."
+
+3. **Irrelevant News Detection**: If search results contain irrelevant information (e.g., AI Token consumption metrics), the report will add: "Note: Due to this token being too obscure on-chain, this report is primarily based on narrative potential and visual gene simulation analysis."
