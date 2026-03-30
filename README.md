@@ -247,4 +247,5 @@ This tool is for **entertainment and educational purposes only**. Not financial 
 
 MIT License
 
+**Maintainer**: AntalphaAI  
 **From keyboard smashes to moonshots - we analyze them all! 🚀**
