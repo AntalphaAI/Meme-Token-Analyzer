@@ -4,9 +4,6 @@
 
 A powerful LangGraph workflow that analyzes Meme tokens with humor and expertise, generating comprehensive wealth gene detection reports using real-time web sentiment, AI-generated prediction images, and multimodal AI analysis.
 
-[![Coze Coding](https://img.shields.io/badge/Powered%20by-Coze%20Coding-blue)](https://coze.com)
-[![LangGraph](https://img.shields.io/badge/Framework-LangGraph-green)](https://github.com/langchain-ai/langgraph)
-[![Python](https://img.shields.io/badge/Language-Python-yellow)](https://python.org)
 
 ---
 
@@ -40,25 +37,6 @@ A powerful LangGraph workflow that analyzes Meme tokens with humor and expertise
 | 🌙 **Moonshot** | 100x expected | High growth potential |
 | 🗑️ **Paper Hand** | Likely a rug | High risk |
 | 💩 **Shitcoin** | Stay far away | Avoid |
-
----
-
-## 🚀 Quick Start
-
-### Input
-```json
-{
-  "token_name": "PEPE"
-}
-```
-
-### Output
-```json
-{
-  "analysis_report": "Full Markdown analysis with emoji-rich formatting",
-  "generated_image_url": "https://coze-coding-mockdata.tos-cn-beijing.volces.com/..."
-}
-```
 
 ---
 
@@ -269,23 +247,4 @@ This tool is for **entertainment and educational purposes only**. Not financial 
 
 MIT License
 
----
-
-## 🙏 Acknowledgments
-
-Built with:
-- [Coze Coding](https://coze.com) - AI-powered development platform
-- [LangGraph](https://github.com/langchain-ai/langgraph) - Workflow orchestration
-- [doubao-seed](https://www.volcengine.com/) - Vision-language model
-
----
-
-<div align="center">
-
-**Made with 💎 by Coze Coding AI**
-
-[Try it now](https://coze.com) • [Report Bug](https://github.com) • [Request Feature](https://github.com)
-
 **From keyboard smashes to moonshots - we analyze them all! 🚀**
-
-</div>
