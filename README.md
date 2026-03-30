@@ -221,9 +221,9 @@ See `BOT_CONFIG.md` for:
 - User onboarding tips
 
 **Suggested Commands:**
-1. `探测 $PEPE 的暴富基因` (Classic meme analysis)
-2. `看看 $BTC 的 Meme 属性` (Major coin detection)
-3. `随便测个乱码：qwertyuiop` (Edge case demonstration)
+1. `$PEPE` (Classic meme analysis)
+2. `$BTC as a meme？` (Major coin detection)
+3. `random stuff: qwertyuiop` (Edge case demonstration)
 
 ---
 
