@@ -2,6 +2,24 @@
 
 This guide provides complete implementation details for building a Meme Token Analyzer workflow using LangGraph and coze-coding-dev-sdk.
 
+## ⚡ Quick Start (30 seconds)
+
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Run the workflow
+python -c "
+from graphs.graph import main_graph
+result = main_graph.invoke({'token_name': 'PEPE'})
+print(result['analysis_report'])
+"
+
+# 3. Start HTTP server
+python src/main.py
+# Then POST to http://localhost:5000/run with {"token_name": "PEPE"}
+```
+
 ## Overview
 
 The workflow consists of 4 nodes:

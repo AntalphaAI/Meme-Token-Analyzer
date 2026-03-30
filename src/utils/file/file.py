@@ -117,7 +117,7 @@ class FileOps:
                             f"文件大小 ({int(content_length)} bytes) 超过限制 100MB，已终止下载。"
                         )
 
-                    # 场景：Header 缺失 Content-Length 或服务器 Header 欺骗
+                    # Scenario: Header missing Content-Length or server header spoofing
                     downloaded_content = BytesIO()
                     current_size = 0
 
@@ -126,7 +126,7 @@ class FileOps:
                         if chunk:
                             current_size += len(chunk)
                             if current_size > MAX_FILE_SIZE:
-                                raise Exception(f"检测到文件超过 100MB，已中断。")
+                                raise Exception(f"File size exceeds 100MB, download aborted.")
                             downloaded_content.write(chunk)
 
                     # 获取完整 bytes
@@ -163,7 +163,7 @@ class FileOps:
         try:
             os.makedirs(FileOps.DOWNLOAD_DIR, exist_ok=True)
 
-            # 简单的文件名生成策略 (真实场景建议用 url hash 避免重复下载)
+            # Simple filename generation strategy (real scenarios recommend using url hash to avoid duplicate downloads)
             # ext = os.path.splitext(file_obj.url.split('?')[0])[1] or ".tmp"
             # filename = f"{uuid.uuid4().hex}{ext}"
             local_path = os.path.join(FileOps.DOWNLOAD_DIR, filename)
@@ -182,8 +182,8 @@ class FileOps:
     @staticmethod
     def read_bytes(file_obj:File) -> bytes:
         """
-        获取文件的原始二进制数据
-        场景：上传到OSS、保存到本地、传给图像处理库
+        Get file raw binary data
+        Scenario: Upload to OSS, save locally, pass to image processing libraries
         """
         content, _ = FileOps._get_bytes_stream(file_obj)
         return content
@@ -191,8 +191,8 @@ class FileOps:
     @staticmethod
     def extract_text(file_obj: File) -> str:
         """
-        提取文本内容
-        场景：RAG、HTML解析、文档分析
+        Extract text content
+        Scenario: RAG, HTML parsing, document analysis
         """
         try:
             content, ext = FileOps._get_bytes_stream(file_obj)

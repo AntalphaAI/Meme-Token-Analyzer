@@ -1,7 +1,20 @@
 ---
 name: meme-token-analyzer
-description: Meme Token 分析工作流，实现网络搜索、图片生成、数据清洗和多模态分析，输出"暴富基因"检测报告。当用户需要分析 Meme 币的舆情、生成预测图片、并输出专业的投资分析报告时，请使用此技能。支持多维度分析、智能检测和幽默专业的报告生成。
+version: 1.0.0
+description: "Meme Token Analyzer workflow with web search, image generation, data cleaning, and multimodal analysis to output wealth gene detection reports. Use this skill when analyzing meme token sentiment, generating prediction images, and producing professional investment analysis reports. Supports multi-dimensional analysis, intelligent detection, and humorous professional reporting."
+author: AntalphaAI
 license: MIT
+requires: [python-3.12]
+metadata:
+  repository: https://github.com/AntalphaAI/Meme-Token-Analyzer
+  install:
+    type: python
+    command: pip install -r requirements.txt
+  env:
+    - name: COZE_WORKSPACE_PATH
+      description: Workspace path for configuration files
+      required: true
+      sensitive: false
 ---
 
 # Meme Token Analyzer Skill
@@ -143,6 +156,17 @@ def analyze_before_trade(token_name):
         return "RESEARCH", result["generated_image_url"]
 ```
 
+## Security Notes
+
+- **External Requests**: This skill makes requests to external APIs:
+  - Web search APIs (via coze-coding-dev-sdk)
+  - Image generation APIs (via coze-coding-dev-sdk)
+  - LLM APIs (doubao-seed-1-6-vision-250815)
+- **Data Handling**: Token names and search results are sent to external APIs for analysis
+- **File Persistence**: No local file persistence, all operations are stateless
+- **Sensitive Data**: No API keys stored locally, all handled via SDK
+- **Input Validation**: Token names are validated and sanitized before use
+
 ## Best Practices
 
 1. **Use Time Range Filtering**: Always filter search results by time range for fresh data
@@ -157,13 +181,6 @@ def analyze_before_trade(token_name):
 - Image generation quality varies based on token name clarity
 - Analysis is for educational purposes only, not financial advice
 - API rate limits may apply for high-volume usage
-
-## Security Considerations
-
-- Never expose API keys in client-side code
-- All LLM and search calls must be made from backend code
-- Sanitize token names before search queries
-- Validate and sanitize all user inputs
 
 ## Troubleshooting
 
@@ -188,3 +205,8 @@ For skill-related issues:
 - Check the troubleshooting section
 - Review the complete code examples in python/README.md
 - Ensure all prerequisites are met
+
+---
+
+**Maintainer**: AntalphaAI  
+**License**: MIT

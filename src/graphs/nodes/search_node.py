@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 from typing import List, Dict, Any
 from langchain_core.runnables import RunnableConfig
 from langgraph.runtime import Runtime
@@ -23,11 +24,20 @@ def search_node(
     ctx = runtime.context
     
     try:
+        # Input validation
+        if not state.token_name or not isinstance(state.token_name, str):
+            raise ValueError("Invalid token_name: must be a non-empty string")
+        
+        # Sanitize token name for search query (remove special characters)
+        safe_token_name = re.sub(r'[^\w\s-]', '', state.token_name.strip())
+        if not safe_token_name:
+            raise ValueError("Token name contains only invalid characters")
+        
         # Initialize search client
         client = SearchClient(ctx=ctx)
         
         # Build search query with recent time filter
-        query = f"{state.token_name} token news twitter sentiment"
+        query = f"{safe_token_name} token news twitter sentiment"
         
         logger.info(f"Searching for: {query} (time_range: 1 month)")
         
