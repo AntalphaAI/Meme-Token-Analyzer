@@ -1,3 +1,5 @@
+import os
+import json
 import logging
 from langchain_core.runnables import RunnableConfig
 from langgraph.runtime import Runtime
@@ -21,18 +23,28 @@ def image_gen_node(
     ctx = runtime.context
     
     try:
-        # Initialize image generation client
-        client = ImageGenerationClient(ctx=ctx)
+        # Read image generation config
+        cfg_file = os.path.join(os.getenv("COZE_WORKSPACE_PATH"), "config/image_gen_cfg.json")
+        with open(cfg_file, 'r', encoding='utf-8') as fd:
+            img_cfg = json.load(fd)
         
-        # Build prompt
-        prompt = f"A dynamic, high-quality photograph of a cartoon {state.token_name} character launching into space on a rocket, cinematic lighting, trending on ArtStation"
+        # Build prompt from template
+        prompt_template = img_cfg.get("prompt_template", 
+            "A dynamic, high-quality photograph of a cartoon {token_name} character launching into space on a rocket, cinematic lighting, trending on ArtStation")
+        prompt = prompt_template.format(token_name=state.token_name)
+        
+        # Get image size from config
+        size = img_cfg.get("size", "2K")
         
         logger.info(f"Generating image with prompt: {prompt}")
+        
+        # Initialize image generation client
+        client = ImageGenerationClient(ctx=ctx)
         
         # Generate image
         response = client.generate(
             prompt=prompt,
-            size="2K"
+            size=size
         )
         
         # Extract image URL
