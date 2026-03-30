@@ -1,18 +1,8 @@
 # Bot Configuration Guide
 
-## Opening Greeting (开场白)
+## Opening Greeting
 
 Copy and paste this into your Coze Bot settings:
-
-```
-嘿！我是你的 Meme 币'暴富基因'探测器 🧬。
-
-不管是 $PEPE 这种老牌土狗，还是你随手乱打的一个名字，我都能从全网舆情中为你拆解它的'登月'潜力！
-
-快输入一个代币名称试试？🚀
-```
-
-**English Version:**
 
 ```
 Hey! I'm your Meme Token "Wealth Gene" Detector 🧬.
@@ -22,33 +12,49 @@ Whether it's a legendary meme like $PEPE or a random string you typed, I'll anal
 Try entering a token name now! 🚀
 ```
 
+**Chinese Version (Optional):**
+
+```
+嘿！我是你的 Meme 币'暴富基因'探测器 🧬。
+
+不管是 $PEPE 这种老牌土狗，还是你随手乱打的一个名字，我都能从全网舆情中为你拆解它的'登月'潜力！
+
+快输入一个代币名称试试？🚀
+```
+
 ---
 
-## Suggested Commands (快捷指令)
+## Suggested Commands
 
 Add these three commands to help users discover your workflow's capabilities:
 
 ### Command 1: Classic Meme
 ```
-探测 $PEPE 的暴富基因
+Detect wealth gene for $PEPE
 ```
 **Purpose**: Showcase analysis on a well-known meme token
 
+**Chinese Version**: `探测 $PEPE 的暴富基因`
+
 ### Command 2: Major Coin
 ```
-看看 $BTC 的 Meme 属性
+Analyze $BTC meme attributes
 ```
 **Purpose**: Demonstrate smart detection of non-meme major coins
 
+**Chinese Version**: `看看 $BTC 的 Meme 属性`
+
 ### Command 3: Edge Case
 ```
-随便测个乱码：qwertyuiop
+Test random string: qwertyuiop
 ```
 **Purpose**: Highlight edge case handling and real web scraping ability
 
+**Chinese Version**: `随便测个乱码：qwertyuiop`
+
 ---
 
-## Bot Avatar (头像建议)
+## Bot Avatar
 
 Recommended avatar style:
 - 🐸 Pepe the Frog (meme culture)
@@ -58,7 +64,7 @@ Recommended avatar style:
 
 ---
 
-## Bot Tags (标签)
+## Bot Tags
 
 Suggested tags for better discoverability:
 - `meme-token`
