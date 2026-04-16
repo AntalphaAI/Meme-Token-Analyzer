@@ -1,6 +1,6 @@
 ---
 name: meme-token-analyzer
-version: 1.0.0
+version: 1.0.1
 description: "Meme Token Analyzer workflow with web search, image generation, data cleaning, and multimodal analysis to output wealth gene detection reports. Use this skill when analyzing meme token sentiment, generating prediction images, and producing professional investment analysis reports. Supports multi-dimensional analysis, intelligent detection, and humorous professional reporting."
 author: AntalphaAI
 license: MIT
