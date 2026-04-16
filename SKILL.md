@@ -6,16 +6,7 @@ author: AntalphaAI
 license: MIT
 requires: [python-3.12]
 keywords: [meme, token, crypto, cryptocurrency, sentiment-analysis, image-generation, multimodal, ai, langgraph, wealth-gene]
-metadata:
-  repository: https://github.com/AntalphaAI/Meme-Token-Analyzer
-  install:
-    type: python
-    command: pip install -r requirements.txt
-  env:
-    - name: COZE_WORKSPACE_PATH
-      description: Workspace path for configuration files
-      required: true
-      sensitive: false
+metadata: {"repository":"https://github.com/AntalphaAI/Meme-Token-Analyzer","install":{"type":"python","command":"pip install -r requirements.txt"},"env":[{"name":"COZE_WORKSPACE_PATH","description":"Workspace path for configuration files","required":true,"sensitive":false}]}
 ---
 
 # Meme Token Analyzer Skill
